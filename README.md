@@ -84,3 +84,15 @@ select blogs.*, users.username, users.nickname from blogs inner join users on us
 - 数据表，用 JS 中的模型（class 或对象）代替
 - 一条或多条记录，用 JS 中的一个对象或数组代替
 - SQL 语句，用对象的方法来代替
+
+## redis
+
+内存数据库（mysql 是硬盘数据库）
+
+### 启动 redis
+
+redis-server
+
+### 打开命令行操作
+
+redis-cli
