@@ -96,3 +96,17 @@ redis-server
 ### 打开命令行操作
 
 redis-cli
+
+## cookie 和 session
+
+**为什么 session 适合存储到 redis 中？**
+
+- session 访问频繁，对性能要求高
+- session 可以不考虑断电丢失的问题
+- session 数据量不会太大（相比于 mysql 中存储的数据）
+
+**为何网站数据不适合 redis**
+
+- 操作频率没那么高(相比于 session 操作)
+- 断电不能丢失，必须保留
+- 数据量大，内存成本太高
