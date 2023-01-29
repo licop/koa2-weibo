@@ -11,6 +11,10 @@
 
 ## mysql
 
+### 启动 mysql
+
+打开系统偏好设置 --> 点开 mysql 小图标
+
 ### 使用数据库
 
 ```
@@ -67,5 +71,16 @@ delete from blogs where id=3
 // 连表查询 根据外键将表合并
 select * from blogs inner join users on users.id = blogs.userid
 // 挑选数据
-select blogs.*, users.username, users.nickname from blogs inner join users on users.id = blogs.userid、
+select blogs.*, users.username, users.nickname from blogs inner join users on users.id = blogs.userid
 ```
+
+## sequelize
+
+[中文文档](https://www.sequelize.cn/)
+
+### ORM
+
+- ORM-Object Relational Mapping 对象关系映射， 通过操作对象的方式操作数据库
+- 数据表，用 JS 中的模型（class 或对象）代替
+- 一条或多条记录，用 JS 中的一个对象或数组代替
+- SQL 语句，用对象的方法来代替
