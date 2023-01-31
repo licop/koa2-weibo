@@ -2,7 +2,7 @@
  * @description 存储配置
  * @author licop
  */
-const { isProd } = require('../util/env')
+const { isProd } = require('../utils/env')
 
 let REDIS_CONF = {
   port: 6379,

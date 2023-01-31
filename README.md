@@ -110,3 +110,7 @@ redis-cli
 - 操作频率没那么高(相比于 session 操作)
 - 断电不能丢失，必须保留
 - 数据量大，内存成本太高
+
+## 调试
+
+调试地址：chrome://inspect/#devices

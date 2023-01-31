@@ -1,6 +1,6 @@
 // 连接数据库
 const Sequelize = require('sequelize')
-const { isProd, isTest } = require('../util/env')
+const { isProd, isTest } = require('../utils/env')
 
 const conf = {
   host: 'localhost',
