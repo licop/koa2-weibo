@@ -1,11 +1,14 @@
 // 连接数据库
-
-
 const Sequelize = require('sequelize')
+const { isProd, isTest } = require('../util/env')
 
 const conf = {
   host: 'localhost',
   dialect: 'mysql'
+}
+
+if(isTest) {
+  conf.logging = () => {}
 }
 
 // 线上用连接池
