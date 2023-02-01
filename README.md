@@ -129,3 +129,42 @@ redis-cli
 ## 调试
 
 调试地址：chrome://inspect/#devices
+
+## 技术方案设计
+
+### 架构设计
+
+![](./images/jiagou.png)
+
+### 页面（模版，路由）和 api 设计
+
+**页面路由**
+
+- 注册(/register)
+- 登录(/login)
+- 首页(/)
+- 个人主页(/profile/:username)
+- at 页 (/atme)
+- 广场（/square）
+- 设置（/setting）
+- 错误页（/error）
+- 404 (/\*)
+
+**api 设计**
+
+- 首页
+  - 创建微博 /api/blog/create
+- 图片上传 /api/utils/upload
+  - 加载更多 /api/blog/loadMore/:pageIndex
+  - 个人主页
+- 加载更多 /api/profile/loadMore/:userName/:pageIndex
+  - 关注 /api/profile/follow
+  - 取消关注 /api/profile/unFollow
+- 广场页
+  - 加载更多 /api/square/loadMore/:pageIndex
+- at 页
+  - 创建微博 /api/blog/create
+  - 图片上传 /api/utils/upload
+  - 加载更多 /api/atMe/loadMore/:pageIndex
+
+### 数据模型设计
