@@ -3,7 +3,8 @@
  */
 
 const seq = require('./seq')
-// require('./model')
+
+require('./model/index')
 
 // 测试连接
 seq.authenticate().then(() => {

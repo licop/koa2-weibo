@@ -11,9 +11,10 @@ const { REDIS_CONF } = require('./conf/db')
 const { isProd } = require('./utils/env')
 
 // 路由
-const errorViewRouter = require('./routes/view/error')
 const index = require('./routes/index')
-const users = require('./routes/users')
+const userViewRouter = require('./routes/view/user')
+const userApiRouter = require('./routes/api/user')
+const errorViewRouter = require('./routes/view/error')
 
 // error handler
 let onerrorConf = {}
@@ -61,7 +62,8 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
+app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册到最下面
 
 // error-handling
