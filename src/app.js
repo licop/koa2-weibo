@@ -13,8 +13,7 @@ const { isProd } = require('./utils/env')
 const koaStatic = require('koa-static')
 
 // 路由
-const index = require('./routes/index')
-
+const blogViewRouter = require('./routes/view/blog')
 const utilsApiRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
 const userApiRouter = require('./routes/api/user')
@@ -66,7 +65,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
