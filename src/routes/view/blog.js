@@ -4,6 +4,7 @@
 
 const router = require('koa-router')()
 const { getProfileBlogList } = require('../../controller/blog-profile')
+const { getSquareBlogList } = require('../../controller/blog-square')
 const { loginRedirect } = require('../../middlewares/loginChecks')
 const { isExist } = require('../../controller/user') 
 
@@ -17,7 +18,6 @@ router.get('/profile/', loginRedirect, async (ctx, next) => {
   const { userName } = ctx.session.userInfo
   ctx.redirect(`/profile/${userName}`)
 })
-
 
 router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
   // 已登录用户信息
@@ -39,7 +39,6 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
 
   // 获取微博第一页数据
   const result = await getProfileBlogList(curUserName, 0)
-  console.log(result.data, 26)
   await ctx.render('profile', {
     blogData: {
       ...result.data
@@ -50,6 +49,19 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     }
   })
 })
+
+// 广场页面的路由
+router.get('/square', loginRedirect, async (ctx, next) => {
+  // 获取微博第一页数据
+  const result = await getSquareBlogList(0)
+  
+  await ctx.render('square', {
+    blogData: {
+      ...result.data
+    }
+  })
+})
+
 
 module.exports = router
 

@@ -26,7 +26,7 @@ const redisClient = redis.createClient(REDIS_CONF.port, REDIS_CONF.host)
  */
 async function set(key, val, timeout = 60 * 60) {
   if(typeof val === 'object') {
-    val = JSON.stringify('val')
+    val = JSON.stringify(val)
   }
   await redisClient.set(key, val)
   await redisClient.expire(key, timeout)
