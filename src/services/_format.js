@@ -3,6 +3,7 @@
  */
 
 const { DEFAULT_PICTURE } = require('../conf/constant')
+const { timeFormat } = require('../utils/dt')
 
 function _formatUserPicture(obj) {
   if(obj.picture === null) {
@@ -19,7 +20,7 @@ function _formatUserPicture(obj) {
  */
 function formatUser(list) {
   if(list === null) {
-    return
+    return list
   } 
   if(list instanceof Array) {
     return list.map(_formatUserPicture)
@@ -28,6 +29,30 @@ function formatUser(list) {
   return _formatUserPicture(list) 
 }
 
+// 格式化数据的时间
+function _formatDBTime(obj) {
+  obj.createdAt = timeFormat(obj.createdAt)
+  obj.updatedAt = timeFormat(obj.updatedAt)
+  
+  return obj
+}
+
+/**
+ * 格式化微博信息 
+ */
+function formatBlog(list) {
+  if(list === null) {
+    return list
+  } 
+
+  if(list instanceof Array) {
+    return list.map(_formatDBTime)
+  }
+
+  return _formatDBTime(obj)
+}
+
 module.exports = {
-  formatUser
+  formatUser,
+  formatBlog
 }
