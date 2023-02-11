@@ -1,25 +1,22 @@
 /**
- * @description 微博数据模型
+ * @description 用户关注关系
  */
+
 
 const seq = require('../seq')
 const {INTEGER, STRING, TEXT} = require('../types')
 
-const Blog = seq.define('blog', {
+const UserRelation = seq.define('userRelation', {
   userId: {
     type: INTEGER,
     allowNull: false,
     comment: '用户id'
   },
-  content: {
-    type: TEXT,
+  followerId: {
+    type: INTEGER,
     allowNull: false,
-    comment: '微博内容'
-  },
-  image: {
-    type: STRING,
-    comment: '用户id'
+    comment: '被关注用户的id'
   },
 })
 
-module.exports = Blog
+module.exports = UserRelation

@@ -18,7 +18,6 @@ const conf = {
 
 const seq = new Sequelize(database, user, password, conf)
 
-
 module.exports = seq
 
 
