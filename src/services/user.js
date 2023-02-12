@@ -3,6 +3,7 @@
  */
 
 const { User } = require('../db/model/index')
+const { addFollower } = require('./user-relation')
 const { formatUser } = require('./_format')
 /**
  * 获取用户信息
@@ -43,8 +44,12 @@ async function createUser({userName, password, gender = 3, nickName}) {
     gender,
     nickName: nickName ? nickName : userName
   })
+  const data = result.dataValues
 
-  return result.dataValues
+  // 自己关注自己（方便首页获取数据）
+  addFollower(data.id, data.id)
+  
+  return data
 }
 
 // 删除用户

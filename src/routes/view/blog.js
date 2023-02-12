@@ -8,10 +8,37 @@ const { getSquareBlogList } = require('../../controller/blog-square')
 const { loginRedirect } = require('../../middlewares/loginChecks')
 const { isExist } = require('../../controller/user') 
 const { getFans, getFollowers } = require('../../controller/user-relation')
+const { getHomeBlogList } = require('../../controller/blog-home')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
-  await ctx.render('index', {})
+  const userInfo = ctx.session.userInfo
+  const { id: userId } = userInfo
+
+  // 获取第一页数据
+  const result = await getHomeBlogList(userId)
+  
+  // 获取粉丝
+  const fansResult = await getFans(userId)
+  
+  // 获取关注人列表
+  const followersResult = await getFollowers(userId)
+
+  await ctx.render('index', {
+    userData: {
+      userInfo,
+      fansData: {
+        ...fansResult.data
+      },
+      followersData: {
+        ...followersResult.data
+      }
+    },
+    blogData: {
+      ...result.data
+    }
+  })
+
 })
 
 // 个人主页
