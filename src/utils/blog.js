@@ -16,7 +16,7 @@ const BLOG_LIST_TPL = fs.readFileSync(
  * @param {Array} blogList 微博列表
  * @param {boolean} canReply 是否可以回复
  */
-function getBlogListStr(blogList = [], canReply = false) {
+function getBlogListStr(blogList = [], canReply = true) {
   return ejs.render(BLOG_LIST_TPL, {
     blogList,
     canReply

@@ -19,7 +19,6 @@ async function getFans(userId) {
 // 获取关注人列表
 async function getFollowers(userId) {
   const { count, userList } =  await getFollowersByUser(userId)
-  
   return new SuccessModel({
     count, 
     list: userList

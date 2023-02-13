@@ -2,7 +2,7 @@
  * @description 数据格式化
  */
 
-const { DEFAULT_PICTURE } = require('../conf/constant')
+const { DEFAULT_PICTURE, REG_FOR_AT_WHO } = require('../conf/constant')
 const { timeFormat } = require('../utils/dt')
 
 function _formatUserPicture(obj) {
@@ -37,19 +37,42 @@ function _formatDBTime(obj) {
   return obj
 }
 
+// 格式化微博内容
+function _formatContent(obj) {  
+  obj.contentFormat = obj.content
+  
+  // 格式化 @
+  // from '哈喽 @张三 - zhangsan 你好'
+  // to '哈喽 <a href="/profile/zhangsan">张三</a> 你好'
+  obj.contentFormat = obj.contentFormat.replace(
+    REG_FOR_AT_WHO,
+    (matchStr, nickName, userName) => {
+      return `<a href="/profile/${userName}">@${nickName}</a>`
+    }
+  )
+  console.log(obj.contentFormat, 53)
+
+  return obj
+}
+
 /**
  * 格式化微博信息 
  */
 function formatBlog(list) {
-  if(list === null) {
+  if (list == null) {
     return list
-  } 
-
-  if(list instanceof Array) {
-    return list.map(_formatDBTime)
   }
 
-  return _formatDBTime(obj)
+  if (list instanceof Array) {
+    // 数组
+    return list.map(_formatDBTime).map(_formatContent)
+  }
+  // 对象
+  let result = list
+  result = _formatDBTime(result)
+  result = _formatContent(result)
+  
+  return result
 }
 
 module.exports = {
