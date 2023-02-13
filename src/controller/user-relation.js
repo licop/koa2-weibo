@@ -2,13 +2,13 @@
  * 用户关系 controller
  */
 
-const { getUserByFollower, addFollower, deleteFollower, getFollowersByUser } = require("../services/user-relation")
+const { getUsersByFollower, addFollower, deleteFollower, getFollowersByUser } = require("../services/user-relation")
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { addFollowerFailInfo, deleteFollowerFailInfo } = require("../model/ErrorInfo")
 
 // 根据id获取粉丝列表
 async function getFans(userId) {
-  const { count, userList } =  await getUserByFollower(userId)
+  const { count, userList } =  await getUsersByFollower(userId)
   
   return new SuccessModel({
     count, 
